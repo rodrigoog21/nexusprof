@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Mobile-First</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* ======================================= */
+        /* ==   CONFIGURAÇÕES GLOBAIS E VARIÁVEIS   == */
+        /* ======================================= */
+        :root {
+            --bg-color: #1a1a1a;
+            --bg-container: rgba(10, 10, 10, 0.95);
+            --text-color: #e0e0e0;
+            --text-color-muted: #a0a0a0;
+            --text-color-white: #fff;
+            --primary-color: #be29ec;
+            --primary-color-gradient: rgba(126, 1, 204, 0.4);
+
+            --font-main: 'Poppins', sans-serif;
+            --font-title: 'Press Start 2P', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+        }
+
+        /* ======================================= */
+        /* ==    ESTRUTURA PRINCIPAL (CONTAINER)    == */
+        /* ======================================= */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background-image:
+                linear-gradient(to top left, var(--primary-color-gradient), transparent 50%),
+                linear-gradient(to right, var(--bg-container) 30%, rgba(10, 10, 10, 0.4) 70%),
+                url('https://images.pexels.com/photos/12920063/pexels-photo-12920063.jpeg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 80px; /* Espaço para a nav mobile não sobrepor o conteúdo */
+        }
+
+        /* ======================================= */
+        /* ==   ESTILOS BASE (MOBILE-FIRST)     == */
+        /* ======================================= */
+
+        /* Header de Desktop - Escondido no mobile */
+        .desktop-header {
+            display: none;
+        }
+        
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 2rem 1.5rem; /* Mais padding lateral no mobile */
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-content .subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-title);
+            /* TIPOGRAFIA FLUÍDA: min, ideal, max */
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--text-color-white);
+            margin: 1.5rem 0;
+            background: linear-gradient(to right, var(--text-color-white) 55%, var(--primary-color) 55%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero-content .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn-story {
+            font-family: var(--font-main);
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-color-white);
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            padding: 0.8rem 2.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-story:hover, .btn-story:focus {
+            background-color: var(--primary-color);
+            color: var(--text-color-white);
+        }
+
+        /* NAVEGAÇÃO MOBILE - Barra inferior fixa */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav a {
+            color: var(--text-color-muted);
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            flex-grow: 1;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--text-color-white);
+        }
+
+        .mobile-nav a.active {
+            color: var(--primary-color);
+        }
+
+        /* =============================================== */
+        /* ==   AJUSTES PARA TELAS MAIORES (TABLET/DESKTOP) == */
+        /* =============================================== */
+        @media (min-width: 769px) {
+            
+            /* Esconde a navegação mobile e mostra a de desktop */
+            .mobile-nav {
+                display: none;
+            }
+
+            .desktop-header {
+                width: 100%;
+                padding: 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .desktop-header nav ul {
+                list-style: none;
+                display: flex;
+                gap: 1rem; /* Gap um pouco menor */
+                background-color: rgba(30, 30, 30, 0.5);
+                padding: 0.8rem 1.5rem;
+                border-radius: 10px;
+            }
+
+            .desktop-header nav a {
+                color: var(--text-color-muted);
+                font-size: 1.2rem;
+                text-decoration: none;
+                padding: 0.5rem;
+                display: block;
+                transition: color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .desktop-header nav a:hover {
+                color: var(--text-color-white);
+            }
+
+            .desktop-header nav a.active {
+                color: var(--text-color-white);
+                border: 2px solid var(--primary-color);
+                border-radius: 5px;
+            }
+
+            .profile-icon a {
+                color: var(--text-color-muted);
+                font-size: 1.5rem;
+                background-color: rgba(30, 30, 30, 0.5);
+                padding: 0.8rem 1rem;
+                border-radius: 50%;
+                transition: color 0.3s ease, background-color 0.3s ease;
+            }
+
+            .profile-icon a:hover {
+                background-color: var(--primary-color);
+                color: var(--text-color-white);
+            }
+
+            /* Ajusta o layout principal para desktop */
+            .main-container {
+                padding-bottom: 0; /* Remove padding extra no desktop */
+            }
+            
+            main {
+                text-align: left;
+                padding: 0 2rem;
+            }
+
+            .hero-content {
+                max-width: 50%;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <header class="desktop-header">
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" title="Início"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#" title="Documentos"><i class="fa-solid fa-file-alt"></i></a></li>
+                    <li><a href="#" title="Mapa"><i class="fa-solid fa-map-marker-alt"></i></a></li>
+                    <li><a href="#" title="Estatísticas"><i class="fa-solid fa-chart-bar"></i></a></li>
+                    <li><a href="#" title="Ideias"><i class="fa-solid fa-lightbulb"></i></a></li>
+                    <li><a href="#" title="Configurações"><i class="fa-solid fa-cog"></i></a></li>
+                    <li><a href="#" title="Código"><i class="fa-solid fa-code"></i></a></li>
+                </ul>
+            </nav>
+            <div class="profile-icon">
+                <a href="#" title="Perfil"><i class="fa-solid fa-user"></i></a>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-content">
+                <p class="subtitle">COMPANHIA DOS PROFESSORES APRESENTA</p>
+                <h1>NEXUS</h1>
+                <p class="description">
+                    É o mundo primeiro da Companhia dos Professores a compatibilizar sonhos e metas da
+                    molecada obidanguense com todos os politicos do feudo afim de se livrar do Zé do Pão.
+                    Nosso objetivo é um só: objetivar o cumprimento da meta para alcançarmos nosso objetivo
+                    maior. Um mundo novo para chamar de seu.
+                </p>
+                <a href="#" class="btn-story">HISTÓRIA</a>
+            </section>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="#" class="active"><i class="fa-solid fa-house"></i></a>
+        <a href="#"><i class="fa-solid fa-file-alt"></i></a>
+        <a href="#"><i class="fa-solid fa-map-marker-alt"></i></a>
+        <a href="#"><i class="fa-solid fa-chart-bar"></i></a>
+        <a href="#"><i class="fa-solid fa-user"></i></a>
+    </nav>
+
+</body>
+</html>
+
